@@ -3,8 +3,20 @@
   margin: 0;
 }
 
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
 body {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: 'Ubuntu', sans-serif;
+  background-color: #EDEDED;
+}
+
+section {
+  height: 100vh;
+  scroll-snap-align: center;
 }

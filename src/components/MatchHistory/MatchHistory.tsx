@@ -1,11 +1,70 @@
+import { useEffect, useState } from "react";
+import axios from 'axios';
+import gameData from "../../models/GameDataModel";
+import './matchHistory.scss'
+import { FaTrashAlt } from "react-icons/fa";
+
 const MatchHistory = () => {
+  const [loading, setLoading] = useState(false);
+  const [gameData, setGameData] = useState<gameData[]>([])
+
+  useEffect(() => {
+    setLoading(true)
+    axios
+      .get('http://localhost:4000/')
+      .then(res => {
+        setGameData(res.data);
+        setLoading(false)
+      })
+      .catch(error => {
+        console.log(error);
+        setLoading(false)
+      });
+  }, []);
+
+  const handleDelete = async (id: string) => {
+    axios
+      .delete(`http://localhost:4000/${id}`)
+      .then(() => {
+        setGameData((prevData) =>
+          prevData.filter((gameData) => gameData._id !== id)
+        );
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
   return (
     <div className="match-history">
-      <div className="match-data">
-        <h3>Match ID</h3>
-        <p>Player 1 vs Player 2</p>
-        <p>WINNER: Player 1</p>
-      </div>
+      <h1>Match History</h1>
+      {loading ? '' :
+        <div className="wrapper">
+          {gameData.length === 0 ? (
+            <div>Play some games first!</div>
+          ) : (
+            <>
+              {gameData.map((data, i) => (
+                <div key={i} className="game-summary">
+                  <div className="result-data-left">
+                    <div className="result-title">
+                      <p className="player1">{data.player1}</p>
+                      <p className="vs">vs</p>
+                      <p className="player2">{data.player2}</p>
+                    </div>
+                    <p>Winner: <span>{data.winner}</span></p>
+                  </div>
+                  <div className="result-data-right">
+                    <p className="score">{data.score1} - {data.score2}</p>
+                    <button onClick={() => handleDelete(data._id)}><FaTrashAlt /></button>
+                  </div>
+                </div>
+              ))}
+            </>
+          )}
+
+        </div>
+      }
     </div>
   )
 }

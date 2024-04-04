@@ -1,0 +1,74 @@
+.match-history {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+
+  h1 {
+    font-size: 40px;
+  }
+
+  .wrapper {
+    margin-top: 30px;
+    color: black;
+    height: 600px;
+    width: 400px;
+    padding: 10px;
+    border: 2px solid black;
+    overflow: auto;
+
+    .game-summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 2px solid black;
+      border-radius: 10px;
+
+      .result-title {
+        font-size: 20px;
+        font-weight: 500;
+        flex-wrap: wrap;
+        width: 250px;
+        display: flex;
+        gap: 10px;
+      }
+
+      .result-data-right {
+        display: flex;
+        gap: 10px;
+
+        button {
+          margin-top: 3px;
+          border: none;
+          font-size: 14px;
+          font-weight: bold;
+          color: #DB0038;
+          cursor: pointer;
+        }
+      }
+
+      .score {
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      span {
+        font-weight: 500;
+        color: #c99d01;
+        font-size: 25px;
+      }
+
+      .player1 {
+        color: #DB0038;
+      }
+
+      .player2 {
+        color: #519DD9;
+      }
+    }
+  }
+}

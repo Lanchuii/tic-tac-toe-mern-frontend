@@ -1,0 +1,26 @@
+.title {
+  display: flex;
+  gap: 20px;
+  font-size: 70px;
+  font-weight: bold;
+
+  .tic {
+    color: #519DD9;
+  }
+
+  .tac {
+    margin-top: 30px;
+    color: #DB0038;
+  }
+
+  .toe {
+    margin-top: 60px;
+    color: #F7C200;
+  }
+}
+
+@media (max-width: 500px) {
+  .title {
+    font-size: 60px;
+  }
+}

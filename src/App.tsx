@@ -1,12 +1,13 @@
 import './App.scss'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Link } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import Game from './pages/Game';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <HomePage />
+    element: <HomePage />,
+    errorElement: <div>404 Not Found <Link to='/'>Return to homepage</Link></div>
   },
   {
     path: '/game',
