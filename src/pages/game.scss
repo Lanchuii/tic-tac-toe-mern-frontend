@@ -1,11 +1,14 @@
 .game {
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 100vh;
 
   .game-wrapper {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 30px;
     margin-top: -50px;
 

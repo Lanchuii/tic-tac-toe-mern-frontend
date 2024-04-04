@@ -115,14 +115,14 @@ const GameBoard = ({ firstPlayer, secondPlayer }: Props) => {
   }
 
   return (
-    <div className="game-board-wrapper">
+    <div className="game-container">
       {isGameOver ? (
         <div className="post-game-summary">
           <h1 className="post-game-result" style={{ color: overallWinner === firstPlayer.name ? '#519DD9' : '#DB0038' }}>{overallWinner !== "Draw" ? `${overallWinner} is the Winner!` : "It's a TIE!"}</h1>
-          <p className="score">{firstPlayer.score} - {secondPlayer.score}</p>
+          <p className="post-game-score">{firstPlayer.score} - {secondPlayer.score}</p>
         </div>
       ) : (
-        <div>
+        <div className="board-container">
           <div className="match-info">
             <div>
               <p className="turn-indicator" style={{ color: isX ? '#519DD9' : '#DB0038' }}>{isRoundOver ? `${currentPlayer} wins!` : `${currentPlayer}'s Turn!`}</p>
