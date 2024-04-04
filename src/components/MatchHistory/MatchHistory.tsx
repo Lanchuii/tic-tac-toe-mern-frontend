@@ -43,7 +43,7 @@ const MatchHistory = () => {
       {loading ? '' :
         <div className="wrapper">
           {gameData.length === 0 ? (
-            <div>Play some games first!</div>
+            <p>Play some games first!</p>
           ) : (
             <>
               {gameData.map((data, i) => (

@@ -15,10 +15,12 @@ const GameBoard = ({ firstPlayer, secondPlayer }: Props) => {
   const [cellValue, setCellValue] = useState<string[]>(Array(9).fill(null));
   const [isX, setIsX] = useState<boolean>(true);
   const [currentPlayer, setCurrentPlayer] = useState<string>(firstPlayer.name);
+  const [turnCounter, setTurnCounter] = useState<number>(0);
+  const [isDraw, setIsDraw] = useState<boolean>(false)
   const [isRoundOver, setIsRoundOver] = useState<boolean>(false);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
 
-  const URL = import.meta.env.VITE_REACT_APP_API_URL
+  const URL = import.meta.env.VITE_REACT_APP_API_URL;
 
   // Handles user interaction with each square/cell
   const handleCell = async (i: number) => {
@@ -30,17 +32,17 @@ const GameBoard = ({ firstPlayer, secondPlayer }: Props) => {
 
     // Allows player to interact with the cell but only if it's null
     if (cellValue[i] === null) {
+      setTurnCounter(turnCounter + 1)
       cellValue[i] = isX ? 'X' : 'O';
       setCellValue(cellValue);
       setIsX(!isX);
     }
 
-    const winner = calculateWinner(cellValue)
-
     // Once a winner is decided, the round is over and the score is updated
+    const winner = calculateWinner(cellValue)
     if (winner) {
       currentPlayer === firstPlayer.name ? firstPlayer.score++ : secondPlayer.score++
-      setIsRoundOver(true)
+      setIsRoundOver(true);
     }
     else {
 
@@ -51,6 +53,13 @@ const GameBoard = ({ firstPlayer, secondPlayer }: Props) => {
       else {
         setCurrentPlayer(firstPlayer.name);
       }
+    }
+
+    if (turnCounter === 8 && !winner) {
+      firstPlayer.score++
+      secondPlayer.score++
+      setIsRoundOver(true);
+      setIsDraw(true);
     }
   };
 
@@ -94,7 +103,10 @@ const GameBoard = ({ firstPlayer, secondPlayer }: Props) => {
   // Resets the game
   const handleRematch = () => {
     setIsX(true);
+    setIsDraw(false);
+    setCurrentPlayer(firstPlayer.name);
     setIsRoundOver(false);
+    setTurnCounter(0);
     setCellValue(Array(9).fill(null));
   }
 
@@ -125,13 +137,17 @@ const GameBoard = ({ firstPlayer, secondPlayer }: Props) => {
         <div className="board-container">
           <div className="match-info">
             <div>
-              <p className="turn-indicator" style={{ color: isX ? '#519DD9' : '#DB0038' }}>{isRoundOver ? `${currentPlayer} wins!` : `${currentPlayer}'s Turn!`}</p>
+              {isRoundOver ? (
+                <p className="turn-result">{isDraw ? "Draw" : `${currentPlayer} wins!`}</p>
+              ) : (
+                <p className="turn-indicator" style={{ color: isX ? '#519DD9' : '#DB0038' }}>{currentPlayer}'s Turn!</p>
+              )}
               <p className="score">{firstPlayer.score} - {secondPlayer.score}</p>
             </div>
             {isRoundOver ? (
               <div className="match-buttons">
                 <motion.button className="rematch-btn" onClick={handleRematch} whileHover={{ scale: 1.1 }}><VscDebugRestart />Rematch</motion.button>
-                <motion.button className="stop-btn" onClick={handleStop} whileHover={{ scale: 1.1 }}><FaStop />Stop</motion.button>
+                <motion.button className="stop-btn" onClick={handleStop} whileHover={{ scale: 1.1 }}><FaStop />Finish</motion.button>
               </div>
             ) : ''}
           </div>

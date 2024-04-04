@@ -15,7 +15,12 @@
       .turn-indicator {
         font-size: 25px;
         font-weight: 500;
-        color: #519DD9;
+      }
+
+      .turn-result {
+        font-size: 25px;
+        font-weight: 500;
+        color: #ca9f01;
       }
 
       .match-buttons {
@@ -87,6 +92,7 @@
 
     .post-game-result {
       font-size: 40px;
+      text-align: center;
     }
 
     .post-game-score {

@@ -38,7 +38,7 @@ const EnterUser = ({ setPlayer, handlePage, currentPage }: Props) => {
             }
           }}
         />
-        <motion.button type="submit" disabled={playerName.name.length > 12 || playerName.name === ''} whileHover={{ scale: 1.1 }}>Enter</motion.button>
+        <motion.button type="submit" disabled={playerName.name.length > 12 || playerName.name === ''} whileHover={{ scale: 1.1 }}>Enter name</motion.button>
       </form>
     </div>
   )
