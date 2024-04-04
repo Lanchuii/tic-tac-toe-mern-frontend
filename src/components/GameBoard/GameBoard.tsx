@@ -18,7 +18,7 @@ const GameBoard = ({ firstPlayer, secondPlayer }: Props) => {
   const [isRoundOver, setIsRoundOver] = useState<boolean>(false);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
 
-  const URL = import.meta.env.API_URL
+  const URL = import.meta.env.VITE_REACT_APP_API_URL
 
   // Handles user interaction with each square/cell
   const handleCell = async (i: number) => {
