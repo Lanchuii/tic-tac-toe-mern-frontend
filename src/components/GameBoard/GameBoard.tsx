@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from 'react-router-dom'
 import axios from "axios";
 import './gameBoard.scss'
 import playerModel from "../../models/playerModel";
 import { VscDebugRestart } from "react-icons/vsc";
-import { FaStop } from "react-icons/fa";
+import { FaStop, FaArrowLeft } from "react-icons/fa";
 
 interface Props {
   firstPlayer: playerModel
@@ -132,24 +133,19 @@ const GameBoard = ({ firstPlayer, secondPlayer }: Props) => {
         <div className="post-game-summary">
           <h1 className="post-game-result" style={{ color: overallWinner === firstPlayer.name ? '#519DD9' : '#DB0038' }}>{overallWinner !== "Draw" ? `${overallWinner} is the Winner!` : "It's a TIE!"}</h1>
           <p className="post-game-score">{firstPlayer.score} - {secondPlayer.score}</p>
+          <Link className="post-game-link" to='/'>
+            <motion.div className='home-btn' whileHover={{ scale: 1.1 }}><FaArrowLeft />take me back</motion.div>
+          </Link>
         </div>
       ) : (
         <div className="board-container">
-          <div className="match-info">
-            <div>
-              {isRoundOver ? (
-                <p className="turn-result">{isDraw ? "Draw" : `${currentPlayer} wins!`}</p>
-              ) : (
-                <p className="turn-indicator" style={{ color: isX ? '#519DD9' : '#DB0038' }}>{currentPlayer}'s Turn!</p>
-              )}
-              <p className="score">{firstPlayer.score} - {secondPlayer.score}</p>
-            </div>
+          <div className="turn-info">
             {isRoundOver ? (
-              <div className="match-buttons">
-                <motion.button className="rematch-btn" onClick={handleRematch} whileHover={{ scale: 1.1 }}><VscDebugRestart />Rematch</motion.button>
-                <motion.button className="stop-btn" onClick={handleStop} whileHover={{ scale: 1.1 }}><FaStop />Finish</motion.button>
-              </div>
-            ) : ''}
+              <p className="turn-result">{isDraw ? "Draw" : `${currentPlayer} wins!`}</p>
+            ) : (
+              <p className="turn-indicator" style={{ color: isX ? '#519DD9' : '#DB0038' }}>{currentPlayer}'s Turn!</p>
+            )}
+            <p className="score">{firstPlayer.score} - {secondPlayer.score}</p>
           </div>
           <div className="game-board">
             <div className="board-row">
@@ -168,6 +164,12 @@ const GameBoard = ({ firstPlayer, secondPlayer }: Props) => {
               <motion.div className="board-cell" style={{ color: cellValue[8] === 'X' ? '#519DD9' : '#DB0038' }} onClick={() => handleCell(8)} whileHover={{ scale: 1.1 }}>{cellValue[8]}</motion.div>
             </div>
           </div>
+          {isRoundOver ? (
+            <div className="match-buttons">
+              <motion.button className="rematch-btn" onClick={handleRematch} whileHover={{ scale: 1.1 }}><VscDebugRestart />Rematch</motion.button>
+              <motion.button className="stop-btn" onClick={handleStop} whileHover={{ scale: 1.1 }}><FaStop />Finish</motion.button>
+            </div>
+          ) : <div className="space"></div>}
         </div>
       )}
     </div>

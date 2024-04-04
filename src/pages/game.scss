@@ -13,6 +13,11 @@
     margin-top: -50px;
 
     .link {
+      position: fixed;
+      top: 0;
+      left: 0;
+      margin-top: 10px;
+      margin-left: 10px;
       text-decoration: none;
       width: 140px;
     }
