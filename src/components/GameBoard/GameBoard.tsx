@@ -18,6 +18,8 @@ const GameBoard = ({ firstPlayer, secondPlayer }: Props) => {
   const [isRoundOver, setIsRoundOver] = useState<boolean>(false);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
 
+  const URL = import.meta.env.API_URL
+
   // Handles user interaction with each square/cell
   const handleCell = async (i: number) => {
 
@@ -109,7 +111,7 @@ const GameBoard = ({ firstPlayer, secondPlayer }: Props) => {
     setIsRoundOver(false);
     setIsGameOver(true);
 
-    await axios.post('http://localhost:4000/', finishedData)
+    await axios.post(`${URL}/`, finishedData)
   }
 
   return (

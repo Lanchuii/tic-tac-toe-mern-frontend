@@ -8,10 +8,12 @@ const MatchHistory = () => {
   const [loading, setLoading] = useState(false);
   const [gameData, setGameData] = useState<gameData[]>([])
 
+  const URL = import.meta.env.VITE_REACT_APP_API_URL
+
   useEffect(() => {
     setLoading(true)
     axios
-      .get('http://localhost:4000/')
+      .get(`${URL}/`)
       .then(res => {
         setGameData(res.data);
         setLoading(false)
@@ -24,7 +26,7 @@ const MatchHistory = () => {
 
   const handleDelete = async (id: string) => {
     axios
-      .delete(`http://localhost:4000/${id}`)
+      .delete(`${URL}/${id}`)
       .then(() => {
         setGameData((prevData) =>
           prevData.filter((gameData) => gameData._id !== id)
